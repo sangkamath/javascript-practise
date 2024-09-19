@@ -1202,3 +1202,33 @@ const radixSort = arr => {
 };
 
 
+const benchmark = arr => {
+    arr = arr
+        ? arr
+        : [...Array(1000)].map(() => Math.floor(Math.random() * 1000));
+
+    const versions = [
+        { arr: [...arr], title: "Random" },
+        { arr: [...arr.sort((a, b) => a - b)], title: "Sorted" },
+        { arr: [...arr.reverse()], title: "Reversed" },
+        { arr: new Array(1000).fill(8), title: "Equal" }
+    ];
+
+    const sorts = [
+        { func: bubbleSort, title: "Bubble" },
+        { func: quickSort, title: "Quick" },
+        { func: radixSort, title: "Radix" }
+    ];
+
+    for (let { arr, title } of versions) {
+        console.log(`\n${title} Data`);
+        console.log("*******************************");
+        for (let { func, title } of sorts) {
+            const before = Date.now();
+            for (let i = 0; i < 1000; i++) {
+                func([...arr]);
+            }
+            console.log(`${title} Sort: ${(Date.now() - before) / 1000}sec`);
+        }
+    }
+};
