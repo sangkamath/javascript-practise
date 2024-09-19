@@ -1118,3 +1118,87 @@ function getTop5(hits) {
 function getBottom5(hits) {
     return sortedHitsTuple.slice(0, 5).map(([referrer]) => referrer);
 }
+
+function getElementsByStyle = function (prop, value) {
+    let elements = [];
+    const _getElementFromNode = function (node) {
+        if (node) {
+            for (let i = 0; i < node.children.length; i++) {
+                let element = node.children[i];
+                let styles = getComputedStyle(element);
+                if (styles && styles.get(prop) === value) {
+                    elements.push(element);
+                }
+                if (element.childElementCount) {
+                    _getElementFromNode(element);
+                }
+            }
+        }
+    }
+    if (document.body.hasChildNodes()) {
+        _getElementFromNode(document.body);
+    }
+    return elements;
+}
+
+/*
+1. You type https://jennapederson.dev/hello-world in your browser and press Enter
+2. Browser looks up IP address for the domain
+3. Browser initiates TCP connection with the server (transmission control protocol)
+4. Browser sends the HTTP request to the server
+5. Server processes request and sends back a response
+6. Browser renders the content
+*/
+
+const bubbleSort = arr => {
+    for (let i = 0; i < arr.length - 1; i++) {
+        let change = false;
+        for (let j = 0; j < arr.length - (i + 1); j++) {
+            if (arr[j] > arr[j + 1]) {
+                change = true;
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+        }
+        if (!change) break;
+    }
+    return arr;
+};
+
+const quickSort = arr => {
+    if (arr.length < 2) return arr;
+
+    const pivot = arr[Math.floor(Math.random() * arr.length)];
+
+    let left = [];
+    let equal = [];
+    let right = [];
+
+    for (let element of arr) {
+        if (element > pivot) right.push(element);
+        else if (element < pivot) left.push(element);
+        else equal.push(element);
+    }
+
+    return quickSort(left)
+        .concat(equal)
+        .concat(quickSort(right));
+};
+
+const radixSort = arr => {
+    const maxNum = Math.max(...arr) * 10;
+    let divisor = 10;
+
+    while (divisor < maxNum) {
+        let buckets = [...Array(10)].map(() => []);
+
+        for (let num of arr) {
+            buckets[Math.floor((num % divisor) / (divisor / 10))].push(num);
+        }
+
+        arr = [].concat.apply([], buckets);
+        divisor *= 10;
+    }
+    return arr;
+};
+
+
