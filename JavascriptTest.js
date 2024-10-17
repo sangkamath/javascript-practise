@@ -236,7 +236,6 @@ pq.dequeue();
 pq.front();
 pq.printCollection();
 
-/*
 class Node {
     constructor(data, left = null, right = null) {
         this.data = data;
@@ -251,23 +250,23 @@ class BST {
     }
     add(data) {
         const node = this.root;
-        if(node === null) {
+        if (node === null) {
             this.root = new Node(data);
             return;
         } else {
-            const searchTree = function(node) {
-                if(data < node.data) {
-                    if(node.left == null) {
+            const searchTree = function (node) {
+                if (data < node.data) {
+                    if (node.left == null) {
                         node.left = new Node(data);
                         return;
-                    } else if(node.left != null) {
+                    } else if (node.left != null) {
                         return searchTree(node.left);
                     }
-                } else if(data > node.data) {
-                    if(node.right === null) {
+                } else if (data > node.data) {
+                    if (node.right === null) {
                         node.right = new Node(data);
                         return;
-                    } else if(node.right != null)
+                    } else if (node.right != null)
                         return searchTree(node.right);
                 } else {
                     return null;
@@ -279,7 +278,7 @@ class BST {
 
     findMin() {
         let current = this.root;
-        while(current.left !== null) {
+        while (current.left !== null) {
             current = current.left;
         }
         return current.data;
@@ -287,7 +286,7 @@ class BST {
 
     findMax() {
         let current = this.root;
-        while(current.right !== null) {
+        while (current.right !== null) {
             current = current.right;
         }
         return current.data;
@@ -295,13 +294,13 @@ class BST {
 
     find(data) {
         let current = this.root;
-        while(current.data !== data) {
-            if(data < current.data) {
+        while (current.data !== data) {
+            if (data < current.data) {
                 current = current.left;
-            }else {
+            } else {
                 current = current.right;
             }
-            if(current === null) {
+            if (current === null) {
                 return null;
             }
         }
@@ -310,11 +309,11 @@ class BST {
 
     isPresent(data) {
         let current = this.root;
-        while(current) {
-            if(data === current.data) {
+        while (current) {
+            if (data === current.data) {
                 return true;
             }
-            if(data < current.data) {
+            if (data < current.data) {
                 current = current.left;
             } else {
                 current = current.right;
@@ -324,28 +323,28 @@ class BST {
     }
 
     remove(data) {
-        const removeNode = function(node, data) {
-            if(node == null) {
+        const removeNode = function (node, data) {
+            if (node == null) {
                 return null;
             }
-            if(data == node.data){
-                if(node.left == null && node.right == null) {
+            if (data == node.data) {
+                if (node.left == null && node.right == null) {
                     return null;
                 }
-                if(node.left == null) {
+                if (node.left == null) {
                     return node.right;
                 }
-                if(node.right == null) {
+                if (node.right == null) {
                     return node.left;
                 }
                 var tempNode = node.right;
-                while(tempNode.left != null) {
+                while (tempNode.left != null) {
                     tempNode = tempNode.left;
                 }
                 node.data = tempNode.data;
                 node.right = removeNode(node.right, tempNode.data);
                 return node;
-            } else if(data < node.data) {
+            } else if (data < node.data) {
                 node.left = removeNode(node.left, data);
                 return node;
             } else {
@@ -357,16 +356,16 @@ class BST {
     }
 
     isBalanced() {
-        return(this.findMinHeight() >= this.findMaxHeight() - 1);
+        return (this.findMinHeight() >= this.findMaxHeight() - 1);
     }
-    
+
     findMinHeight(node = this.root) {
-        if(node == null) {
+        if (node == null) {
             return -1;
         }
         let left = this.findMinHeight(node.left);
         let right = this.findMinHeight(node.right);
-        if(left < right) {
+        if (left < right) {
             return left + 1;
         } else {
             return right + 1;
@@ -374,12 +373,12 @@ class BST {
     }
 
     findMaxHeight(node = this.root) {
-        if(node == null) {
+        if (node == null) {
             return -1;
         }
         let left = this.findMaxHeight(node.left);
         let right = this.findMaxHeight(node.right);
-        if(left > right) {
+        if (left > right) {
             return left + 1;
         } else {
             return right + 1;
@@ -387,7 +386,7 @@ class BST {
     }
 
     inOrder() {
-        if(this.root == null) {
+        if (this.root == null) {
             return null;
         } else {
             var result = new Array();
@@ -402,7 +401,7 @@ class BST {
     }
 
     preOrder() {
-        if(this.root == null) {
+        if (this.root == null) {
             return null;
         } else {
             var result = new Array();
@@ -417,7 +416,7 @@ class BST {
     }
 
     postOrder() {
-        if(this.root == null) {
+        if (this.root == null) {
             return null;
         } else {
             var result = new Array();
@@ -434,15 +433,15 @@ class BST {
     levelOrder() {
         let result = [];
         let Q = [];
-        if(this.root != null) {
+        if (this.root != null) {
             Q.push(this.root);
-            while(Q.length > 0) {
+            while (Q.length > 0) {
                 let node = Q.shift();
                 result.push(node.data);
-                if(node.left != null) {
+                if (node.left != null) {
                     Q.push(node.left);
                 };
-                if(node.right != null) {
+                if (node.right != null) {
                     Q.push(node.right);
                 }
             }
@@ -453,7 +452,7 @@ class BST {
     }
 }
 
-/*
+
 const bst = new BST();
 bst.add(4);
 bst.add(2);
@@ -464,9 +463,9 @@ bst.add(5);
 bst.add(7);
 bst.remove(4);
 console.log("Find min " + bst.findMin());
-console.log("Find max "+ bst.findMax());
+console.log("Find max " + bst.findMax());
 bst.remove(7);
-console.log("Find max "+ bst.findMax());
+console.log("Find max " + bst.findMax());
 console.log("Is present 4 is " + bst.isPresent(4));
 
 
@@ -494,8 +493,6 @@ console.log('preOrder: ' + bst.preOrder());
 console.log('postOrder: ' + bst.postOrder());
 
 console.log('levelOrder: ' + bst.levelOrder());
-
-*/
 
 let myMap = function () {
     this.collection = {};
@@ -1119,7 +1116,7 @@ function getBottom5(hits) {
     return sortedHitsTuple.slice(0, 5).map(([referrer]) => referrer);
 }
 
-function getElementsByStyle = function (prop, value) {
+function getElementsByStyle(prop, value) {
     let elements = [];
     const _getElementFromNode = function (node) {
         if (node) {
@@ -1232,3 +1229,39 @@ const benchmark = arr => {
         }
     }
 };
+
+const binarySearch = (array, target) => {
+    let firstIndex = 0;
+    let lastIndex = array.length - 1;
+    while (firstIndex <= lastIndex) {
+        let middleIndex = Math.floor((firstIndex + lastIndex) / 2);
+
+        if (array[middleIndex] === target) {
+            return middleIndex;
+        }
+
+        if (array[middleIndex] > target) {
+            lastIndex = middleIndex - 1;
+        } else {
+            firstIndex = middleIndex + 1;
+        }
+    }
+    return -1;
+};
+
+function recursiveBinarySearch(n, arr) {
+    let mid = Math.floor(arr.length / 2);
+    if (arr.length === 1 && arr[0] != n) {
+        return false;
+    }
+    if (n === arr[mid]) {
+        return true;
+    } else if (n < arr[mid]) {
+        return recursiveBinarySearch(n, arr.slice(0, mid));
+    } else if (n > arr[mid]) {
+        return recursiveBinarySearch(n, arr.slice(mid));
+    }
+}
+
+let score = [12, 22, 45, 67, 96];
+console.log(binarySearch(score, 96));
